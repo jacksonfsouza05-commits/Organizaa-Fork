@@ -17,8 +17,8 @@ Pedro Henrique: pptesch@gmail.com<br>
 #### 2.1 Ideias Selecionadas pelo grupos
 Após realiza a Dinâmica Prática 5–5–5 (Problemas, soluções atuais e pessoas),  descreva as 2 principais ideias definidas pelo grupo .<br>
 
-<br> Ideia 1: 
-<br> Ideia 2: 
+<br> Ideia 1:  Gestão Escolar
+<br> Ideia 2:  Gestão de Estoque
 
 
 #### 2.2 Matriz de seleção
