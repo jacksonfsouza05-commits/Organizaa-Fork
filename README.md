@@ -203,12 +203,11 @@ Como Coordenadora pedagógica, eu quero consultar informações das turmas, gera
 ### 5. PROTÓTIPOS DO SISTEMA<br>
 PROTÓTIPO DO SISTEMA: https://www.figma.com/make/06nSm40jWNLCTANOQbtJwf/Implementar-solicita%C3%A7%C3%A3o-anterior?t=MoawVm13JkvgedsH-1 <br>
 
-
-![Alt text](https://github.com/discproint/template_projeto_integrador/blob/main/arquivos/balsamiq.png?raw=true "Title")
-
-
-#### 5.3 QUAIS PERGUNTAS PODEM SER RESPONDIDAS COM OS SISTEMA WEB/MOBILE PROPOSTOS?
-    a) O sistema proposto poderá fornecer quais tipos de relatórios e informaçes? 
+#### 5.1 QUAIS PERGUNTAS PODEM SER RESPONDIDAS COM OS SISTEMA WEB/MOBILE PROPOSTOS?
+    a) O sistema proposto poderá fornecer quais tipos de relatórios e informaçes? <br>
+    O sistema oferece informações detalhadas e relatórios voltados ao gerenciamento acadêmico e acompanhamento de desempenho do estudante, tais como:<br>
+    Resumos de atividades: Visão geral de atividades pendentes, concluídas, com prazos próximos ou agendadas para o dia.   Indicadores de progresso: Percentual de conclusão geral dos estudos e o avanço específico em cada matéria cadastrada.   Alertas e avisos de prazos: Notificações automáticas sobre vencimentos próximos e resumos diários ou semanais de tarefas.   Visão 
+    cronológica/calendário: Exibição detalhada de tarefas organizadas por datas, prazos e status (pendente, com prazo próximo, concluída).
     b) Crie uma lista com os 5 principais relatórios que poderão ser obtidos por meio do sistema proposto!
     
 > A Empresa DevCom precisa inicialmente dos seguintes relatórios:
