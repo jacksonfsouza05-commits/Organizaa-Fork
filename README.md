@@ -24,15 +24,15 @@ Após realiza a Dinâmica Prática 5–5–5 (Problemas, soluções atuais e pes
 #### 2.2 Matriz de seleção
 <img src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/matrizSelecao.png" Personas src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/matrizSelecao.png" width="500" height="250" /> <br>
 
-<inclua os resultados obtidos pelo grupo na matriz de seleção>
-<br> Ideia 1: <título da ideia>
-<br> afinidade [ ], processo [ ], problema [ ], valor do software [ ], viabilidade [ ]
-<br> Nota final: [ ]
+Ideia 1: Gestão Escolar
+afinidade [ 9/10 ], processo [ 9/10 ], problema [ 10/10 ], valor do software [ 9/10 ], viabilidade [ 9/10 ]
 
-<br> Ideia 2: <título da ideia>
-<br>afinidade [ ], processo [ ], problema [ ], valor do software [ ], viabilidade [ ]
-<br> Nota final: [ ]
+Nota final: [ 9,2/10 ]
 
+Ideia 2: Gestão de Estoque
+afinidade [ 8/10 ], processo [ 8/10 ], problema [ 9/10 ], valor do software [ 9/10 ], viabilidade [ 10/10 ]
+
+Nota final: [ 8,8/10 ]
 
 
 #### 2.3. Opportunity Card da ideia selecioanda
