@@ -37,7 +37,6 @@ Nota final: [ 8,8/10 ]
 
 #### 2.3. Opportunity Card da ideia selecioanda
 
-a) exemplo de oportunit card (observe que neste caso o grupo não incluiu o item 5 e portante precisaria justificar o porque não foi realizado).
 
 <img src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/opportunityCard.png" Personas src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/opportunityCard.png" width="500" height="330" /> <br>
 
