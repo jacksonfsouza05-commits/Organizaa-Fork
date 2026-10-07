@@ -205,17 +205,9 @@ PROTÓTIPO DO SISTEMA: https://www.figma.com/make/06nSm40jWNLCTANOQbtJwf/Impleme
 
 #### 5.1 QUAIS PERGUNTAS PODEM SER RESPONDIDAS COM OS SISTEMA WEB/MOBILE PROPOSTOS?
     a) O sistema proposto poderá fornecer quais tipos de relatórios e informaçes? <br>
-    O sistema oferece informações detalhadas e relatórios voltados ao gerenciamento acadêmico e acompanhamento de desempenho do estudante, tais como:<br>
-    Resumos de atividades: Visão geral de atividades pendentes, concluídas, com prazos próximos ou agendadas para o dia.   Indicadores de progresso: Percentual de conclusão geral dos estudos e o avanço específico em cada matéria cadastrada.   Alertas e avisos de prazos: Notificações automáticas sobre vencimentos próximos e resumos diários ou semanais de tarefas.   Visão 
-    cronológica/calendário: Exibição detalhada de tarefas organizadas por datas, prazos e status (pendente, com prazo próximo, concluída).
-    b) Crie uma lista com os 5 principais relatórios que poderão ser obtidos por meio do sistema proposto!
+    b) Crie uma lista com os 5 principais relatórios que poderão ser obtidos por meio do sistema proposto!<br>
     
-> A Empresa DevCom precisa inicialmente dos seguintes relatórios:
-* Relatório que informe quais são os gerentes de cada departamento incluindo as seguintes informações: número do departamento,  nome do departamento, e nome do gerente.
-* Relatório de empregados por projeto incluindo as seguintes informações: número do projeto, nome do projeto, rg do empregado, nome do empregado e quantidade de horas de trabalho do empregado alocadas ao projeto.
-* Relatório de empregados com dependentes incluindo as seguintes informações: rg do empregado, nome do empregado, nome do dependente, tipo de relação, data de nascimento do dependente e sexo do dependente.
-* Relatório com a quantidade de empregados por cada departamento incluindo as seguintes informações: nome do departamento, supervisor e quantidade de empregados alocados no departamento.
-* Relatório de supervisores e supervisionados incluindo as seguintes informações: nome do supervisor e nome do supervisionado.
+>O sistema oferece informações detalhadas e relatórios voltados ao gerenciamento acadêmico e acompanhamento de desempenho do estudante, tais como:   Resumos de atividades: Visão geral de atividades pendentes, concluídas, com prazos próximos ou agendadas para o dia.   Indicadores de progresso: Percentual de conclusão geral dos estudos e o avanço específico em cada matéria cadastrada.   Alertas e avisos de prazos: Notificações automáticas sobre vencimentos próximos e resumos diários ou semanais de tarefas.   Visão cronológica/calendário: Exibição detalhada de tarefas organizadas por datas, prazos e status (pendente, com prazo próximo, concluída).
  
  ### 6.MODELO CONCEITUAL<br>
     A) Utilizar a Notação adequada (Preferencialmente utilizar o BR Modelo 3)
