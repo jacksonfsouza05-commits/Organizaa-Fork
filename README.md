@@ -42,16 +42,70 @@ a) exemplo de oportunit card (observe que neste caso o grupo não incluiu o item
 <img src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/opportunityCard.png" Personas src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/opportunityCard.png" width="500" height="330" /> <br>
 
 Descreva o que o foi definido pelo grupo para cada item abaixo referenta ao Opportunity Card da ideia selecioanda
-1. Área de afinidade/contexto
-2. Problema percebido
-3. Quem possui o problema
-4. Como é resolvido hoje
-5. Soluções semelhantes
-6. Lacuna inicial
-7. Pessoas acessíveis
-8. Hipótese de oportunidade
-9. Fomento/oportunidade
-10. Principal incerteza/desafio
+1. Área de afinidade/contexto:<br>
+Ambiente escolar e organização acadêmica de estudantes do curso 
+técnico. 
+<br>
+2. Problema percebido<br>
+Muitos alunos esquecem prazos de trabalhos, provas e atividades, pois 
+as informações ficam espalhadas em grupos de WhatsApp, Google 
+Classroom, cadernos e anotações pessoais. <br>
+
+3. Quem possui o problema<br>
+Alunos do curso técnico <br>
+Estudantes que participam de vários grupos de disciplinas <br>
+Alunos que trabalham e estudam ao mesmo tempo<br>
+
+4. Como é resolvido hoje<br>
+Atualmente os alunos utilizam: <br>
+● WhatsApp <br>
+● Google Classroom<br> 
+● Agenda do celular <br>
+● Caderno de anotações <br>
+● Lembretes manuais <br>
+
+5. Soluções semelhantes <br>
+● Google Agenda <br>
+● Todoist <br>
+● Trello <br>
+● Microsoft To Do<br> 
+● Notion<br>
+
+6. Lacuna inicial<br>
+As soluções existentes não são voltadas especificamente para a 
+realidade escolar da turma. As informações continuam dispersas, os 
+lembretes dependem da configuração do usuário e não há uma 
+visualização única de todas as atividades acadêmicas.<br>
+
+7. Pessoas acessíveis<br>
+O grupo consegue conversar com: <br>
+● 5 colegas da turma <br>
+● 1 representante de sala <br>
+● 1 professor <br>
+● 1 coordenador acadêmico<br>
+Essas pessoas podem ajudar a validar se o problema realmente ocorre 
+com frequência.<br>
+
+8. Hipótese de oportunidade<br>
+Desenvolver um aplicativo simples chamado OrganizaAí, que reúna em 
+um único lugar: <br>
+● trabalhos <br>
+● provas <br>
+● atividades <br>
+● lembretes automáticos <br>
+● calendário acadêmico <br>
+● notificações antes do vencimento <br>
+
+9. Fomento/oportunidade<br>
+O uso de smartphones entre os estudantes é praticamente universal. 
+Um aplicativo leve, gratuito e focado na rotina escolar pode aumentar a 
+organização dos alunos, reduzir esquecimentos e melhorar o 
+acompanhamento das disciplinas. <br>
+
+10. Principal incerteza/desafio<br>
+A principal dúvida é saber se os alunos realmente adotariam um novo 
+aplicativo, já que muitos já utilizam WhatsApp e Google Classroom 
+diariamente<br>
 
 
 ### 3.MINIMUNDO<br>
