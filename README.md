@@ -117,7 +117,10 @@ Os alunos recebem lembretes sobre as atividades cadastradas. Um lembrete possui 
 
 ### 4.  Validação da Ideia.<br>
 a) Link do formulário desenvolvido<br>
+https://docs.google.com/forms/d/e/1FAIpQLSd3xThaO2rTdojsGqWAGcErg4Hvr0ipNrDhEcw1tZR1DnMxTw/viewform?usp=sharing&ouid=116192333663505816718
+<br>
 b) Link para Relatório/Apresentação de resultados obtidos<br>
+FAZER <BR>
 
 ### 4.Personas e Histórias de usuário<br>
 <img src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/personas_academia.png" Personas src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/personas_academia.png" width="500" height="500" /> <br>
