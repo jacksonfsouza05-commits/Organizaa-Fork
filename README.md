@@ -201,16 +201,11 @@ Como Coordenadora pedagógica, eu quero consultar informações das turmas, gera
 
 
 ### 5. PROTÓTIPOS DO SISTEMA<br>
-Neste ponto a codificação não e necessária, somente as ideias de telas devem ser desenvolvidas. O princípio aqui é pensar na criação da interface para identificar possíveis informações a serem armazenadas e/ou descartadas <br>
+PROTÓTIPO DO SISTEMA: https://www.figma.com/make/06nSm40jWNLCTANOQbtJwf/Implementar-solicita%C3%A7%C3%A3o-anterior?t=MoawVm13JkvgedsH-1 <br>
 
-Sugestão: https://balsamiq.com/products/mockups/<br>
 
 ![Alt text](https://github.com/discproint/template_projeto_integrador/blob/main/arquivos/balsamiq.png?raw=true "Title")
 
-
-#### 5.1 PROTÓTIPO DO SISTEMA MOBILE 
-
-#### 5.2 PROTÓTIPO DO SISTEMA WEB
 
 #### 5.3 QUAIS PERGUNTAS PODEM SER RESPONDIDAS COM OS SISTEMA WEB/MOBILE PROPOSTOS?
     a) O sistema proposto poderá fornecer quais tipos de relatórios e informaçes? 
