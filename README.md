@@ -123,11 +123,63 @@ b) Link para Relatório/Apresentação de resultados obtidos<br>
 FAZER <BR>
 
 ### 4.Personas e Histórias de usuário<br>
-<img src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/personas_academia.png" Personas src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/personas_academia.png" width="500" height="500" /> <br>
+3 PERSONAS — SISTEMA ESCOLAR<br>
+Persona 1 — Lucas<br>
+Idade: 16 anos<br>
+Perfil: Aluno do Ensino Médio<br>
+Objetivo:<br>
+ Acompanhar suas atividades escolares, notas e frequência sem precisar depender de informações espalhadas.<br>
+O que ele quer:<br>
+    • Consultar notas;<br>
+    • Ver frequência e faltas;<br>
+    • Acessar atividades;<br>
+    • Consultar horários das aulas;<br>
+    • Receber avisos dos professores;<br>
+    • Acompanhar seu desempenho.<br>
+O que ele não quer:<br>
+    • Sistema complicado;<br>
+    • Informações desatualizadas;<br>
+    • Ter que procurar informações em vários lugares;<br>
+    • Perder prazos de atividades.<br>
 
+Persona 2 — Camila<br>
+Idade: 34 anos<br>
+Perfil: Professora<br>
+Objetivo:<br>
+ Organizar suas turmas e acompanhar o desempenho dos alunos.<br>
+O que ela quer:<br>
+    • Registrar notas;<br>
+    • Registrar presença e faltas;<br>
+    • Publicar atividades;<br>
+    • Consultar alunos das suas turmas;<br>
+    • Enviar avisos;<br>
+    • Acompanhar o desempenho da turma;<br>
+    • Consultar o histórico dos alunos.<br>
 
-a) inclusão dos Persons desenvolvidos pelo grupo<br>
-<br>
+O que ela não quer:<br>
+    • Preencher a mesma informação várias vezes;<br>
+    • Sistema lento;<br>
+    • Processos burocráticos;<br>
+    • Dificuldade para encontrar os dados dos alunos.<br>
+
+ Persona 3 — Fernanda<br>
+Idade: 41 anos<br>
+Perfil: Coordenadora pedagógica<br>
+Objetivo:<br>
+ Acompanhar o funcionamento acadêmico da escola e o desempenho dos alunos e professores.<br>
+O que ela quer:<br>
+    • Consultar informações das turmas;<br>
+    • Acompanhar notas e frequência;<br>
+    • Gerar relatórios;<br>
+    • Consultar professores e alunos;<br>
+    • Identificar alunos com baixo desempenho;<br>
+    • Acompanhar atividades e avaliações;<br>
+    • Organizar informações acadêmicas.<br>
+O que ela não quer:<br>
+    • Dados desatualizados;<br>
+    • Relatórios confusos;<br>
+    • Informações espalhadas;<br>
+    • Falta de comunicação entre professores e coordenação.<br>
 
 
 
