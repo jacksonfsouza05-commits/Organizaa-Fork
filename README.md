@@ -1,7 +1,7 @@
 # TRABALHO DE PI:  Título do Trabalho
 Trabalho desenvolvido durante a disciplina de projeto Integrador
 
-# Sumári
+# Sumário
 
 ### 1. COMPONENTES<br>
 Integrantes do grupo<br>
