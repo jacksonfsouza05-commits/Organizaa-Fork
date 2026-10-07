@@ -108,12 +108,12 @@ diariamente<br>
 
 
 ### 3.MINIMUNDO<br>
-Descrever o mini-mundo! (Não deve ser maior do que 30 linhas, se necessário resumir para justar)
-Entrevista com o usuário e identificação dos requisitos.(quando for o caso de sistemas com cliente real)
-Descrição textual das regras de negócio definidas como um subconjunto do mundo real cujos elementos são propriedades que desejamos incluir, processar, armazenar, gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
+O sistema OrganizaAí tem como objetivo auxiliar estudantes no controle de suas atividades acadêmicas, como trabalhos, provas e tarefas.
+Cada aluno possui um cadastro contendo matrícula, nome, e-mail e telefone. Um aluno pode estar matriculado em várias disciplinas, e cada disciplina pode possuir vários alunos.
+Cada disciplina é ministrada por um professor, que possui código, nome e e-mail.
+Em cada disciplina podem ser cadastradas várias atividades. Uma atividade possui título, descrição, data de entrega e tipo (trabalho, prova, exercício ou projeto).
+Os alunos recebem lembretes sobre as atividades cadastradas. Um lembrete possui data e hora de envio e está relacionado a uma atividade específica e a um aluno específico
 <br>
-
-> <descrição>
 
 ### 4.  Validação da Ideia.<br>
 a) Link do formulário desenvolvido<br>
