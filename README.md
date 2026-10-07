@@ -185,8 +185,20 @@ O que ela não quer:<br>
 
 <img src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/us_academia.png" Personas src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/us_academia.png" width="500" height="230" /> <br>
 
-b) inclusão das Histórias de usuário desenvolvidas pelo grupo
-<br>
+HISTÓRIAS DE USUÁRIOS<br>
+
+EXEMPLO 1 - LUCAS <br>
+
+Como aluno da escola, eu quero consultar notas, frequências, consultar horários e outros, para facilitar e acompanhar minha evolução e notas.<br>
+
+EXEMPLO 2 - CAMILA<br>
+
+Como professora de escolas, eu quero publicar notas, registrar presenças e faltas, enviar avisos e outros, para exercer meu trabalho de forma prática..<br>
+
+EXEMPLO 3 - FERNANDA<br>
+
+Como Coordenadora pedagógica, eu quero consultar informações das turmas, gerar relatórios, acompanhar notas e frequências, organi	zar informações acadêmicas, para que o funcionamento da escola aconteça e fique organizada<br>
+
 
 ### 5. PROTÓTIPOS DO SISTEMA<br>
 Neste ponto a codificação não e necessária, somente as ideias de telas devem ser desenvolvidas. O princípio aqui é pensar na criação da interface para identificar possíveis informações a serem armazenadas e/ou descartadas <br>
