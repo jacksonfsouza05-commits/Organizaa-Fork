@@ -331,7 +331,7 @@ Controle de Frequência, Presenças e Faltas (Chamadas):<br>
 
 Tabelas do Modelo Conceitual: Chamada<br>
 
-### 4.PMC<br>
+### 10. Project Model Canvas (GP) <br>
 ![GP](./GP.png)      
 
 a) inclusão do PMC desenvolvido pelo grupo <br>
