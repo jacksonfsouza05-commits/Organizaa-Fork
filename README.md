@@ -332,6 +332,6 @@ Controle de Frequência, Presenças e Faltas (Chamadas):<br>
 Tabelas do Modelo Conceitual: Chamada<br>
 
 ### 4.PMC<br>
-![Exemplo de PMC](https://github.com/discproint/template_projeto_integrador/blob/main/arquivos/PMC.jpg?raw=true "PMC")
+![GP](./GP.png)      
 
 a) inclusão do PMC desenvolvido pelo grupo <br>
