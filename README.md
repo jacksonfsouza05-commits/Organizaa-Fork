@@ -227,12 +227,44 @@ Relatório de Progresso Geral e por Matéria: Métrica detalhada que exibe o per
 ![Modelo Conceitual](./modelo-conceitual.png)      
     
 #### 7 Descrição dos dados 
-    [objeto]: [descrição do objeto]
-    
-    EXEMPLO:
-    CLIENTE: Tabela que armazena as informações relativas ao cliente<br>
-    CPF: campo que armazena o número de Cadastro de Pessoa Física para cada cliente da empresa.<br>
-
+    CURSO: Tabela que armazena as informações relativas ao curso<br>
+nome: campo que armazena a denominação oficial do curso<br>
+id_curso: chave primária que identifica unicamente cada curso<br>
+<br>
+ALUNOS: Tabela que armazena as informações relativas ao aluno<br>
+id_aluno: chave primária que identifica unicamente o aluno<br>
+nome: campo que armazena o nome completo do aluno<br>
+senha: campo que armazena a senha de acesso ao sistema<br>
+e-mail: campo que armazena o endereço de correio eletrônico do aluno<br>
+numero_matricula: campo que armazena o número oficial de matrícula<br>
+fone: campo que armazena o número de telefone de contato<br>
+<br>
+HISTORICO: Tabela que armazena as informações relativas ao histórico acadêmico<br>
+cont: campo que armazena a contagem ou quantidade de registros<br>
+n_consu: campo que armazena o número de consulta do histórico<br>
+aprovacao: campo que armazena o status de aprovação na disciplina<br>
+<br>
+NOTA: Tabela que armazena as informações relativas às notas das avaliações<br>
+id_nota: chave primária que identifica unicamente a nota<br>
+nota_materias: campo que armazena o valor da nota obtida na matéria<br>
+<br>
+CHAMADA: Tabela que armazena as informações relativas ao controle de chamadas e frequência<br>
+id_chamadas: chave primária que identifica unicamente o registro de chamada<br>
+presencas: campo que armazena a quantidade de presenças do aluno<br>
+faltas: campo que armazena a quantidade de faltas do aluno<br>
+<br>
+PROFESSORES: Tabela que armazena as informações relativas ao professor<br>
+id_professor: chave primária que identifica unicamente o professor<br>
+nome: campo que armazena o nome completo do professor<br>
+login: campo que armazena o nome de utilizador para acesso<br>
+senha: campo que armazena a senha de segurança do professor<br>
+e-mail: campo que armazena o e-mail institucional ou de contato<br>
+nivel: campo que armazena o nível ou categoria acadêmica do docente<br>
+fone: campo que armazena o telefone de contato do professor<br>
+<br>
+MATERIAS: Tabela que armazena as informações relativas às disciplinas/matérias<br>
+id_materias: chave primária que identifica unicamente a matéria<br>
+nome: campo que armazena o nome da disciplina
 
 
 ### 8	RASTREABILIDADE DOS ARTEFATOS<br>
