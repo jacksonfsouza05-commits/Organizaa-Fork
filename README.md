@@ -272,6 +272,37 @@ nome: campo que armazena o nome da disciplina
         b) Protótipo vs Modelo conceitual (Histórias de Usuário e em quais tabelas aquele dado está sendo registrado).
         (modelos devem obrigatoriamente estar em conformidade de rastreabilidade)
 
+<BR>
+A) a) Histórias de Usuário vs. Protótipo<br>
+(Associação de cada História de Usuário / Requisito com a respectiva tela do protótipo do sistema AvisAí)<br>
+
+HU 01 (Lucas - Aluno): Consultar notas e desempenho<br>
+
+Tela do Protótipo: Tela de Progresso (onde exibe as atividades concluídas e o progresso geral/por matéria) e Tela de Matérias.<br>
+
+HU 02 (Lucas - Aluno): Ver frequência, faltas e atividades<br>
+
+Tela do Protótipo: Tela de Atividades (com abas de pendentes, próximas do prazo e concluídas) e Tela de Início (resumo diário).<br>
+
+HU 03 (Lucas - Aluno): Consultar horários e prazos/calendário<br>
+
+Tela do Protótipo: Tela de Calendário.<br>
+
+HU 04 (Camila - Professora): Publicar atividades e conteúdos<br>
+
+Tela do Protótipo: Tela de Atividades (botão superior "Nova atividade").<br>
+
+HU 05 (Camila - Professora): Registrar notas, presenças e faltas<br>
+
+Tela do Protótipo: Telas de gestão de turmas e diário associadas às abas de Matérias e relatórios de notas/chamadas.<br>
+
+HU 06 (Fernanda - Coordenadora): Consultar informações de turmas, alunos e professores<br>
+
+Tela do Protótipo: Tela de Matérias e abas de listagem geral de cadastros.<br>
+
+HU 07 (Fernanda - Coordenadora): Acompanhar notas, frequência e gerar relatórios<br>
+
+Tela do Protótipo: Tela de Progresso e painéis de visão geral.<br>
 
 ### 4.PMC<br>
 ![Exemplo de PMC](https://github.com/discproint/template_projeto_integrador/blob/main/arquivos/PMC.jpg?raw=true "PMC")
