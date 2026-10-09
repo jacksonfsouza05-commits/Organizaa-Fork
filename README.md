@@ -22,7 +22,7 @@ Após realiza a Dinâmica Prática 5–5–5 (Problemas, soluções atuais e pes
 
 
 #### 2.2 Matriz de seleção
-<img src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/matrizSelecao.png" Personas src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/matrizSelecao.png" width="500" height="250" /> <br>
+<img src="https://raw.githubusercontent.com/templatetab/template_projeto_integrador/refs/heads/main/arquivos/MATRIZ DE SELEÇÃO.png" width="500" height="250" /> <br>
 
 Ideia 1: Gestão Escolar<br>
 afinidade [ 9/10 ], processo [ 9/10 ], problema [ 10/10 ], valor do software [ 9/10 ], viabilidade [ 9/10 ]
