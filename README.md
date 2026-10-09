@@ -333,5 +333,3 @@ Tabelas do Modelo Conceitual: Chamada<br>
 
 ### 10. Project Model Canvas (GP) <br>
 ![GP](./GP.png)      
-
-a) inclusão do PMC desenvolvido pelo grupo <br>
