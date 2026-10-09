@@ -120,7 +120,7 @@ a) Link do formulário desenvolvido<br>
 https://docs.google.com/forms/d/e/1FAIpQLSd3xThaO2rTdojsGqWAGcErg4Hvr0ipNrDhEcw1tZR1DnMxTw/viewform?usp=sharing&ouid=116192333663505816718
 <br>
 b) Link para Relatório/Apresentação de resultados obtidos<br>
-FAZER <BR>
+https://canva.link/s592bgh3lj5fiwx <BR>
 
 ### 4.Personas e Histórias de usuário<br>
 3 PERSONAS — SISTEMA ESCOLAR<br>
