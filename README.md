@@ -1,4 +1,4 @@
-# TRABALHO DE PI:  Título do Trabalho
+# TRABALHO DE PI:  OrganizaAÍ
 Trabalho desenvolvido durante a disciplina de projeto Integrador
 
 # Sumário
