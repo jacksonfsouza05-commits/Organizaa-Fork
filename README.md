@@ -33,10 +33,7 @@ afinidade [ 8/10 ], processo [ 8/10 ], problema [ 9/10 ], valor do software [ 9/
 Nota final: [ 8,8/10 ]
 
 
-#### 2.3. Opportunity Card da ideia selecioanda
-
-
-<img src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/opportunityCard.png" Personas src="https://raw.githubusercontent.com/templatetrab/template_projeto_integrador/refs/heads/main/arquivos/opportunityCard.png" width="500" height="330" /> <br>
+#### 2.3. Opportunity Card da ideia selecioanda<br>
 
 Descreva o que o foi definido pelo grupo para cada item abaixo referenta ao Opportunity Card da ideia selecioanda
 1. Área de afinidade/contexto:<br>
