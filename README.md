@@ -1,4 +1,4 @@
-# TRABALHO DE PI:  OrganizaAÍ
+# TRABALHO PROJETO INTEGRADOR:  OrganizaAÍ
 Trabalho desenvolvido durante a disciplina de projeto Integrador
 
 # Sumário
