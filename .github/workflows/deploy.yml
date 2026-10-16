@@ -20,7 +20,7 @@ jobs:
           node-version: 22
       - run: npm install
         working-directory: codigo
-      -       - run: npm run build
+      - run: npm run build
         working-directory: codigo
         env:
           VITE_API_URL: ${{ vars.VITE_API_URL }}
