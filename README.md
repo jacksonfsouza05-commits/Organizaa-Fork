@@ -1,5 +1,5 @@
 # TRABALHO PROJETO INTEGRADOR:  OrganizaAÍ
-Trabalho desenvolvido durante a disciplina de projeto Integrador
+Trabalho desenvolvido durante a disciplina de projeto Integrador<br>
 Site/app: https://jacksonfsouza05-commits.github.io/Organizaa-Fork/
 # Sumário
 
