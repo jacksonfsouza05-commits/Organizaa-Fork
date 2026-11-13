@@ -7,9 +7,10 @@ interface CabecalhoProps {
   titulo: string;
   subtitulo?: string;
   onAdicionarAtividade?: () => void;
+  rotuloAcao?: string;
 }
 
-export default function Cabecalho({ titulo, subtitulo, onAdicionarAtividade }: CabecalhoProps) {
+export default function Cabecalho({ titulo, subtitulo, onAdicionarAtividade, rotuloAcao = "Nova atividade" }: CabecalhoProps) {
   const [notificacoesAbertas, setNotificacoesAbertas] = useState(false);
 
   const { estudante } = useSessao();
@@ -34,7 +35,7 @@ export default function Cabecalho({ titulo, subtitulo, onAdicionarAtividade }: C
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <path d="M8 3v10M3 8h10"/>
             </svg>
-            Nova atividade
+            {rotuloAcao}
           </button>
         )}
         <div className="relative">

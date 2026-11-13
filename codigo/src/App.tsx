@@ -107,6 +107,13 @@ export default function App() {
     }
   };
 
+  const aoArquivarMateria = async (id: number, arquivada: boolean) => {
+    try {
+      await api.arquivarMateria(id, arquivada);
+      await carregar();
+    } catch (e) { falhou(e); }
+  };
+
   const aoExcluirMateria = async (id: number) => {
     try {
       await api.excluirMateria(id);
@@ -120,13 +127,17 @@ export default function App() {
     if (pagina === "materias" || pagina === "inicio" || pagina === "progresso") carregar().catch(falhou);
   };
 
+  const materiasAtivas = materias.filter(m => !m.arquivada);
+  const idsArquivados = new Set(materias.filter(m => m.arquivada).map(m => m.id));
+  const atividadesAtivas = atividades.filter(a => !idsArquivados.has(a.materiaId));
+
   const renderizarPagina = () => {
     switch (paginaAtual) {
       case "inicio":
         return (
           <Painel
-            atividades={atividades}
-            materias={materias}
+            atividades={atividadesAtivas}
+            materias={materiasAtivas}
             onNavegar={navegar}
             onConcluir={aoConcluir}
           />
@@ -134,7 +145,7 @@ export default function App() {
       case "atividades":
         return (
           <Atividades
-            atividades={atividades}
+            atividades={atividadesAtivas}
             onNavegar={navegar}
             onConcluir={aoConcluir}
             onReabrir={aoReabrir}
@@ -145,7 +156,7 @@ export default function App() {
       case "adicionar-atividade":
         return (
           <AdicionarAtividade
-            materias={materias}
+            materias={materiasAtivas}
             onSalvar={aoSalvarAtividade}
             onNavegar={navegar}
             editando={editandoAtividade}
@@ -158,15 +169,16 @@ export default function App() {
             onNavegar={navegar}
             onSelectMateria={setMateriaAtiva}
             onAdicionarMateria={aoAdicionarMateria}
+            onArquivarMateria={aoArquivarMateria}
             onExcluirMateria={aoExcluirMateria}
           />
         );
       case "resumo-materia":
         return <ResumoMateria materia={materiaAtiva} onNavegar={navegar} onMudou={() => carregar().catch(falhou)} />;
       case "calendario":
-        return <Calendario atividades={atividades} onConcluir={aoConcluir} />;
+        return <Calendario atividades={atividadesAtivas} onConcluir={aoConcluir} />;
       case "progresso":
-        return <Progresso atividades={atividades} materias={materias} />;
+        return <Progresso atividades={atividadesAtivas} materias={materiasAtivas} />;
       case "configuracoes":
         return <Configuracoes />;
       default:

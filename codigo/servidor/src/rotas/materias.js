@@ -4,7 +4,7 @@ import { consultar } from "../banco.js";
 const router = Router();
 
 const CONSULTA = `
-  select m.id, m.nome, m.cor,
+  select m.id, m.nome, m.cor, m.arquivada,
     (select count(*) from atividades a where a.materia_id = m.id)::int as atividades,
     (select count(*) from atividades a where a.materia_id = m.id and a.concluida)::int as concluidas,
     (select count(*) from conteudos c where c.materia_id = m.id)::int as conteudos,
@@ -37,6 +37,17 @@ router.delete("/:id", async (req, res) => {
   const r = await consultar("delete from materias where id = $1 and estudante_id = $2", [req.params.id, req.estudanteId]);
   if (!r.rowCount) return res.status(404).json({ erro: "Matéria não encontrada" });
   res.status(204).end();
+});
+
+router.patch("/:id/arquivar", async (req, res) => {
+  const arquivada = req.body.arquivada !== false;
+  const r = await consultar(
+    "update materias set arquivada = $1 where id = $2 and estudante_id = $3",
+    [arquivada, req.params.id, req.estudanteId]
+  );
+  if (!r.rowCount) return res.status(404).json({ erro: "Matéria não encontrada" });
+  const { rows } = await consultar(`${CONSULTA} where m.id = $1`, [req.params.id]);
+  res.json(rows[0]);
 });
 
 router.get("/:id/conteudos", async (req, res) => {

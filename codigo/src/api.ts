@@ -75,6 +75,7 @@ export const api = {
 
   materias: () => requisicao<Materia[]>("GET", "/materias"),
   criarMateria: (nome: string, cor: string) => requisicao<Materia>("POST", "/materias", { nome, cor }),
+  arquivarMateria: (id: number, arquivada: boolean) => requisicao<Materia>("PATCH", `/materias/${id}/arquivar`, { arquivada }),
   excluirMateria: (id: number) => requisicao<void>("DELETE", `/materias/${id}`),
 
   conteudos: (materiaId: number) => requisicao<Conteudo[]>("GET", `/materias/${materiaId}/conteudos`),

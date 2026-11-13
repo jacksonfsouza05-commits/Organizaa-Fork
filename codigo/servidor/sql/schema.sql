@@ -22,6 +22,8 @@ create table if not exists materias (
   unique (estudante_id, nome)
 );
 
+alter table materias add column if not exists arquivada boolean not null default false;
+
 create table if not exists atividades (
   id serial primary key,
   estudante_id int not null references estudantes(id) on delete cascade,

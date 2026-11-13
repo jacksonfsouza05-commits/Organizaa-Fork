@@ -33,6 +33,7 @@ export interface Materia {
   concluidas: number;
   conteudos: number;
   estudados: number;
+  arquivada: boolean;
 }
 
 export interface Conteudo {
