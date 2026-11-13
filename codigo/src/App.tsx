@@ -1,22 +1,22 @@
 import { useCallback, useEffect, useState } from "react";
-import type { Page, Atividade, Materia, Estudante } from "./data";
-import { api, getToken, limparToken, salvarToken, type DadosAtividade } from "./api";
-import { SessaoContext } from "./session";
-import Sidebar from "./components/Sidebar";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import Atividades from "./pages/Atividades";
-import AdicionarAtividade from "./pages/AdicionarAtividade";
-import Materias from "./pages/Materias";
-import ResumoMateria from "./pages/ResumoMateria";
-import Calendario from "./pages/Calendario";
-import Progresso from "./pages/Progresso";
-import Configuracoes from "./pages/Configuracoes";
+import type { Pagina, Atividade, Materia, Estudante } from "./dados";
+import { api, obterToken, limparToken, salvarToken, type DadosAtividade } from "./api";
+import { SessaoContext } from "./sessao";
+import BarraLateral from "./componentes/BarraLateral";
+import Acesso from "./paginas/Acesso";
+import Painel from "./paginas/Painel";
+import Atividades from "./paginas/Atividades";
+import AdicionarAtividade from "./paginas/AdicionarAtividade";
+import Materias from "./paginas/Materias";
+import ResumoMateria from "./paginas/ResumoMateria";
+import Calendario from "./paginas/Calendario";
+import Progresso from "./paginas/Progresso";
+import Configuracoes from "./paginas/Configuracoes";
 
 export default function App() {
   const [estudante, setEstudante] = useState<Estudante | null>(null);
-  const [iniciando, setIniciando] = useState(!!getToken());
-  const [currentPage, setCurrentPage] = useState<Page>("dashboard");
+  const [iniciando, setIniciando] = useState(!!obterToken());
+  const [paginaAtual, setPaginaAtual] = useState<Pagina>("inicio");
   const [atividades, setAtividades] = useState<Atividade[]>([]);
   const [materias, setMaterias] = useState<Materia[]>([]);
   const [materiaAtiva, setMateriaAtiva] = useState<Materia | null>(null);
@@ -40,11 +40,11 @@ export default function App() {
     setAtividades([]);
     setMaterias([]);
     setMateriaAtiva(null);
-    setCurrentPage("dashboard");
+    setPaginaAtual("inicio");
   }, []);
 
   useEffect(() => {
-    if (!getToken()) return;
+    if (!obterToken()) return;
     api.eu()
       .then(async (e) => {
         setEstudante(e);
@@ -61,23 +61,23 @@ export default function App() {
   };
 
   if (iniciando) return <div className="min-h-screen flex items-center justify-center text-[#6B7280] text-sm">Carregando...</div>;
-  if (!estudante) return <Login onEntrar={aoEntrar} />;
+  if (!estudante) return <Acesso onEntrar={aoEntrar} />;
 
-  const handleConcluir = async (id: number) => {
+  const aoConcluir = async (id: number) => {
     try {
       await api.concluirAtividade(id);
       await carregar();
     } catch (e) { falhou(e); }
   };
 
-  const handleExcluir = async (id: number) => {
+  const aoExcluir = async (id: number) => {
     try {
       await api.excluirAtividade(id);
       await carregar();
     } catch (e) { falhou(e); }
   };
 
-  const handleSalvarAtividade = async (dados: DadosAtividade, id?: number) => {
+  const aoSalvarAtividade = async (dados: DadosAtividade, id?: number) => {
     try {
       if (id) await api.editarAtividade(id, dados);
       else await api.criarAtividade(dados);
@@ -89,7 +89,7 @@ export default function App() {
     }
   };
 
-  const handleAdicionarMateria = async (nome: string, cor: string) => {
+  const aoAdicionarMateria = async (nome: string, cor: string) => {
     try {
       await api.criarMateria(nome, cor);
       await carregar();
@@ -100,46 +100,46 @@ export default function App() {
     }
   };
 
-  const handleExcluirMateria = async (id: number) => {
+  const aoExcluirMateria = async (id: number) => {
     try {
       await api.excluirMateria(id);
       await carregar();
     } catch (e) { falhou(e); }
   };
 
-  const navigate = (page: Page) => {
-    setCurrentPage(page);
-    if (page !== "adicionar-atividade") setEditandoAtividade(null);
-    if (page === "materias" || page === "dashboard" || page === "progresso") carregar().catch(falhou);
+  const navegar = (pagina: Pagina) => {
+    setPaginaAtual(pagina);
+    if (pagina !== "adicionar-atividade") setEditandoAtividade(null);
+    if (pagina === "materias" || pagina === "inicio" || pagina === "progresso") carregar().catch(falhou);
   };
 
-  const renderPage = () => {
-    switch (currentPage) {
-      case "dashboard":
+  const renderizarPagina = () => {
+    switch (paginaAtual) {
+      case "inicio":
         return (
-          <Dashboard
+          <Painel
             atividades={atividades}
             materias={materias}
-            onNavigate={navigate}
-            onConcluir={handleConcluir}
+            onNavegar={navegar}
+            onConcluir={aoConcluir}
           />
         );
       case "atividades":
         return (
           <Atividades
             atividades={atividades}
-            onNavigate={navigate}
-            onConcluir={handleConcluir}
-            onExcluir={handleExcluir}
-            onEditar={(a) => { setEditandoAtividade(a); navigate("adicionar-atividade"); }}
+            onNavegar={navegar}
+            onConcluir={aoConcluir}
+            onExcluir={aoExcluir}
+            onEditar={(a) => { setEditandoAtividade(a); navegar("adicionar-atividade"); }}
           />
         );
       case "adicionar-atividade":
         return (
           <AdicionarAtividade
             materias={materias}
-            onSalvar={handleSalvarAtividade}
-            onNavigate={navigate}
+            onSalvar={aoSalvarAtividade}
+            onNavegar={navegar}
             editando={editandoAtividade}
           />
         );
@@ -147,16 +147,16 @@ export default function App() {
         return (
           <Materias
             materias={materias}
-            onNavigate={navigate}
+            onNavegar={navegar}
             onSelectMateria={setMateriaAtiva}
-            onAdicionarMateria={handleAdicionarMateria}
-            onExcluirMateria={handleExcluirMateria}
+            onAdicionarMateria={aoAdicionarMateria}
+            onExcluirMateria={aoExcluirMateria}
           />
         );
       case "resumo-materia":
-        return <ResumoMateria materia={materiaAtiva} onNavigate={navigate} onMudou={() => carregar().catch(falhou)} />;
+        return <ResumoMateria materia={materiaAtiva} onNavegar={navegar} onMudou={() => carregar().catch(falhou)} />;
       case "calendario":
-        return <Calendario atividades={atividades} onConcluir={handleConcluir} />;
+        return <Calendario atividades={atividades} onConcluir={aoConcluir} />;
       case "progresso":
         return <Progresso atividades={atividades} materias={materias} />;
       case "configuracoes":
@@ -169,9 +169,9 @@ export default function App() {
   return (
     <SessaoContext.Provider value={{ estudante, setEstudante, sair }}>
       <div className="flex min-h-screen bg-[#F5F3FF]">
-        <Sidebar currentPage={currentPage} onNavigate={navigate} />
+        <BarraLateral paginaAtual={paginaAtual} onNavegar={navegar} />
         <main className="flex-1 ml-60 flex flex-col min-h-screen">
-          {renderPage()}
+          {renderizarPagina()}
         </main>
         {aviso && (
           <div className="fixed bottom-6 right-6 z-50 bg-red-600 text-white text-sm px-4 py-3 rounded-lg shadow-lg">

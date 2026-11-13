@@ -51,7 +51,7 @@ h1, h2, h3, h4, h5, h6, .font-display {
   font-family: 'Outfit', sans-serif;
 }
 
-/* Custom scrollbar */
+/* Barra de rolagem personalizada */
 ::-webkit-scrollbar {
   width: 4px;
   height: 4px;
@@ -67,7 +67,7 @@ h1, h2, h3, h4, h5, h6, .font-display {
   background: var(--accent);
 }
 
-/* Transitions */
+/* Transições */
 * {
   transition-property: color, background-color, border-color, box-shadow;
   transition-duration: 150ms;
