@@ -70,6 +70,7 @@ export const api = {
   criarAtividade: (d: DadosAtividade) => requisicao<Atividade>("POST", "/atividades", d),
   editarAtividade: (id: number, d: DadosAtividade) => requisicao<Atividade>("PUT", `/atividades/${id}`, d),
   concluirAtividade: (id: number) => requisicao<Atividade>("PATCH", `/atividades/${id}/concluir`, {}),
+  reabrirAtividade: (id: number) => requisicao<Atividade>("PATCH", `/atividades/${id}/concluir`, { concluida: false }),
   excluirAtividade: (id: number) => requisicao<void>("DELETE", `/atividades/${id}`),
 
   materias: () => requisicao<Materia[]>("GET", "/materias"),

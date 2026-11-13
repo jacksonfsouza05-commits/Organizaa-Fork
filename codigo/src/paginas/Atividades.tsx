@@ -1,27 +1,69 @@
 import { useState } from "react";
 import type { Atividade, Pagina } from "../dados";
-import { formatarData, diasAte, rotuloStatus, rotuloPrioridade } from "../dados";
+import { formatarData, diasAte, rotuloPrioridade } from "../dados";
 import Cabecalho from "../componentes/Cabecalho";
 
 interface AtividadesProps {
   atividades: Atividade[];
   onNavegar: (pagina: Pagina) => void;
   onConcluir: (id: number) => void;
+  onReabrir: (id: number) => void;
   onExcluir: (id: number) => void;
   onEditar: (a: Atividade) => void;
 }
 
 type Filtro = "todas" | "pendente" | "concluida" | "prazo-proximo";
+type Agrupamento = "materia" | "mes";
 
-export default function Atividades({ atividades, onNavegar, onConcluir, onExcluir, onEditar }: AtividadesProps) {
+interface Grupo {
+  chave: string;
+  titulo: string;
+  itens: Atividade[];
+  materiaId?: number;
+}
+
+const titulo = { fontFamily: "'Outfit', sans-serif" };
+
+const capitalizar = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
+
+const dataConclusao = (a: Atividade) => {
+  if (!a.concluidaEm) return null;
+  const d = new Date(a.concluidaEm);
+  if (isNaN(d.getTime())) return null;
+  return d.toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
+};
+
+const rotuloMes = (prazo: string) => {
+  const [y, m] = prazo.split("-").map(Number);
+  return capitalizar(new Date(y, m - 1, 1).toLocaleDateString("pt-BR", { month: "long", year: "numeric" }));
+};
+
+const rotuloPrazo = (dias: number) => {
+  if (dias < 0) return "Atrasada";
+  if (dias === 0) return "Hoje";
+  if (dias === 1) return "Amanhã";
+  return `Em ${dias} dias`;
+};
+
+const corPrazo = (dias: number) => (dias <= 1 ? "#B91C1C" : dias <= 7 ? "#B45309" : "#6B7280");
+
+const coresPrioridade: Record<string, string> = {
+  alta: "bg-red-50 text-red-700",
+  media: "bg-amber-50 text-amber-700",
+  baixa: "bg-green-50 text-green-700",
+};
+
+export default function Atividades({ atividades, onNavegar, onConcluir, onReabrir, onExcluir }: AtividadesProps) {
   const [filtro, setFiltro] = useState<Filtro>("todas");
+  const [agrupar, setAgrupar] = useState<Agrupamento>("materia");
   const [busca, setBusca] = useState("");
   const [confirmarExcluir, setConfirmarExcluir] = useState<number | null>(null);
   const [detalhe, setDetalhe] = useState<Atividade | null>(null);
 
+  const termo = busca.trim().toLowerCase();
   const filtradas = atividades.filter(a => {
     const combinaFiltro = filtro === "todas" || a.status === filtro;
-    const combinaBusca = a.nome.toLowerCase().includes(busca.toLowerCase()) || a.materia.toLowerCase().includes(busca.toLowerCase());
+    const combinaBusca = a.nome.toLowerCase().includes(termo) || a.materia.toLowerCase().includes(termo);
     return combinaFiltro && combinaBusca;
   });
 
@@ -32,140 +74,177 @@ export default function Atividades({ atividades, onNavegar, onConcluir, onExclui
     { chave: "concluida", rotulo: "Concluídas", quantidade: atividades.filter(a => a.status === "concluida").length },
   ];
 
-  const coresStatus: Record<string, string> = {
-    pendente: "bg-[#EDE9FE] text-[#7C3AED]",
-    concluida: "bg-green-100 text-green-700",
-    "prazo-proximo": "bg-amber-100 text-amber-700",
-  };
+  // Ordem dentro de cada grupo: pendentes por prazo, concluídas da mais recente para a mais antiga
+  const ordenar = (lista: Atividade[]) =>
+    [...lista].sort((a, b) => {
+      const ca = a.status === "concluida";
+      const cb = b.status === "concluida";
+      if (ca !== cb) return ca ? 1 : -1;
+      if (ca && cb) return (b.concluidaEm ?? "").localeCompare(a.concluidaEm ?? "");
+      return a.prazo.localeCompare(b.prazo);
+    });
 
-  const coresPrioridade: Record<string, string> = {
-    alta: "bg-red-100 text-red-600",
-    media: "bg-amber-100 text-amber-600",
-    baixa: "bg-green-100 text-green-600",
-  };
+  const grupos: Grupo[] = (() => {
+    const mapa = new Map<string, Grupo>();
+    for (const a of filtradas) {
+      const chave = agrupar === "materia" ? `m${a.materiaId}` : a.prazo.slice(0, 7);
+      if (!mapa.has(chave)) {
+        mapa.set(chave, {
+          chave,
+          titulo: agrupar === "materia" ? a.materia : rotuloMes(a.prazo),
+          itens: [],
+          materiaId: agrupar === "materia" ? a.materiaId : undefined,
+        });
+      }
+      mapa.get(chave)!.itens.push(a);
+    }
+    const lista = [...mapa.values()].map(g => ({ ...g, itens: ordenar(g.itens) }));
+    if (agrupar === "mes") return lista.sort((a, b) => a.chave.localeCompare(b.chave));
+    const completa = (g: Grupo) => {
+      const todas = atividades.filter(a => a.materiaId === g.materiaId);
+      return todas.length > 0 && todas.every(a => a.status === "concluida");
+    };
+    return lista.sort((a, b) => Number(completa(b)) - Number(completa(a)) || a.titulo.localeCompare(b.titulo));
+  })();
+
+  const botaoContorno =
+    "px-3.5 py-1.5 text-sm font-medium text-[#6D28D9] bg-white border border-[#DDD6FE] rounded-lg hover:bg-[#F5F3FF] flex-shrink-0";
 
   return (
     <div className="flex flex-col h-full">
       <Cabecalho titulo="Minhas Atividades" onAdicionarAtividade={() => onNavegar("adicionar-atividade")} />
       <div className="flex-1 overflow-y-auto p-6">
         {/* Busca */}
-        <div className="relative mb-5">
-          <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/>
-          </svg>
-          <input
-            type="text"
-            value={busca}
-            onChange={e => setBusca(e.target.value)}
-            placeholder="Buscar atividade ou matéria..."
-            className="w-full pl-9 pr-4 py-2.5 bg-white border border-[#DDD6FE] rounded-lg text-sm text-[#1E1B2E] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#7C3AED] focus:border-transparent"
-          />
-        </div>
+        <label htmlFor="busca-atividade" className="block text-xs text-[#4B5563] mb-1.5">Buscar</label>
+        <input
+          id="busca-atividade"
+          type="text"
+          value={busca}
+          onChange={e => setBusca(e.target.value)}
+          placeholder="Buscar atividade ou matéria..."
+          className="w-full px-4 py-2.5 mb-4 bg-white border border-[#DDD6FE] rounded-xl text-sm text-[#1E1B2E] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#7C3AED] focus:border-transparent"
+        />
 
         {/* Filtros */}
-        <div className="flex gap-2 mb-5 flex-wrap">
+        <div className="flex gap-2 mb-4 flex-wrap">
           {filtros.map(f => (
             <button
               key={f.chave}
               onClick={() => setFiltro(f.chave)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              aria-pressed={filtro === f.chave}
+              className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
                 filtro === f.chave
-                  ? "bg-[#7C3AED] text-white"
-                  : "bg-white border border-[#DDD6FE] text-[#6B7280] hover:bg-[#EDE9FE] hover:text-[#7C3AED] hover:border-[#7C3AED]"
+                  ? "bg-[#7C3AED] border-[#7C3AED] text-white"
+                  : "bg-white border-[#DDD6FE] text-[#1E1B2E] hover:bg-[#F5F3FF]"
               }`}
             >
-              {f.rotulo}
-              <span className={`text-xs px-1.5 py-0.5 rounded-full ${filtro === f.chave ? "bg-white/20 text-white" : "bg-[#F0EDF9] text-[#7C3AED]"}`}>
-                {f.quantidade}
-              </span>
+              {f.rotulo} ({f.quantidade})
             </button>
           ))}
         </div>
 
-        {/* Tabela */}
-        <div className="bg-white rounded-xl border border-[#DDD6FE] overflow-hidden">
-          <div className="grid grid-cols-12 gap-4 px-4 py-3 border-b border-[#F0EDF9] bg-[#FAFAFA]">
-            <div className="col-span-4 text-xs font-semibold text-[#6B7280] uppercase tracking-wide">Atividade</div>
-            <div className="col-span-2 text-xs font-semibold text-[#6B7280] uppercase tracking-wide">Matéria</div>
-            <div className="col-span-2 text-xs font-semibold text-[#6B7280] uppercase tracking-wide">Prazo</div>
-            <div className="col-span-1 text-xs font-semibold text-[#6B7280] uppercase tracking-wide">Prior.</div>
-            <div className="col-span-2 text-xs font-semibold text-[#6B7280] uppercase tracking-wide">Status</div>
-            <div className="col-span-1 text-xs font-semibold text-[#6B7280] uppercase tracking-wide">Ações</div>
-          </div>
-          {filtradas.length === 0 ? (
-            <div className="text-center py-12 text-[#6B7280] text-sm">
-              <div className="text-3xl mb-2">📋</div>
-              Nenhuma atividade encontrada
-            </div>
-          ) : (
-            <div className="divide-y divide-[#F0EDF9]">
-              {filtradas.map(a => {
-                const dias = diasAte(a.prazo);
-                return (
-                  <div key={a.id} className="grid grid-cols-12 gap-4 px-4 py-3.5 hover:bg-[#FAFAFA] transition-colors items-center">
-                    <div className="col-span-4">
-                      <p className="text-sm font-medium text-[#1E1B2E] truncate">{a.nome}</p>
-                      <p className="text-xs text-[#9CA3AF] truncate">{a.descricao}</p>
-                    </div>
-                    <div className="col-span-2">
-                      <span className="text-sm text-[#374151]">{a.materia}</span>
-                    </div>
-                    <div className="col-span-2">
-                      <p className="text-sm text-[#374151]">{formatarData(a.prazo)}</p>
-                      {a.status !== "concluida" && (
-                        <p className="text-xs" style={{ color: dias <= 3 ? "#EF4444" : dias <= 7 ? "#F59E0B" : "#9CA3AF" }}>
-                          {dias < 0 ? "Atrasada" : dias === 0 ? "Hoje" : `${dias}d restantes`}
-                        </p>
-                      )}
-                    </div>
-                    <div className="col-span-1">
-                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${coresPrioridade[a.prioridade]}`}>
-                        {rotuloPrioridade[a.prioridade]}
-                      </span>
-                    </div>
-                    <div className="col-span-2">
-                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${coresStatus[a.status]}`}>
-                        {rotuloStatus[a.status]}
-                      </span>
-                    </div>
-                    <div className="col-span-1 flex items-center gap-1">
-                      <button
-                        onClick={() => setDetalhe(a)}
-                        title="Visualizar"
-                        className="w-7 h-7 flex items-center justify-center rounded-md text-[#6B7280] hover:bg-[#EDE9FE] hover:text-[#7C3AED]"
-                      >
-                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.75">
-                          <ellipse cx="8" cy="8" rx="6" ry="4"/>
-                          <circle cx="8" cy="8" r="2"/>
-                        </svg>
-                      </button>
-                      {a.status !== "concluida" && (
-                        <button
-                          onClick={() => onConcluir(a.id)}
-                          title="Concluir"
-                          className="w-7 h-7 flex items-center justify-center rounded-md text-[#6B7280] hover:bg-green-50 hover:text-green-600"
-                        >
-                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M3 8l3.5 3.5L13 4"/>
-                          </svg>
-                        </button>
-                      )}
-                      <button
-                        onClick={() => setConfirmarExcluir(a.id)}
-                        title="Excluir"
-                        className="w-7 h-7 flex items-center justify-center rounded-md text-[#6B7280] hover:bg-red-50 hover:text-red-500"
-                      >
-                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.75">
-                          <path d="M3 5h10M6 5V3h4v2M7 8v4M9 8v4M4 5l1 9h6l1-9"/>
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
+        {/* Agrupar por */}
+        <div className="flex items-center gap-2 mb-5">
+          <span className="text-xs text-[#4B5563]">Agrupar por:</span>
+          {([["materia", "Matéria"], ["mes", "Mês"]] as const).map(([chave, rotulo]) => (
+            <button
+              key={chave}
+              onClick={() => setAgrupar(chave)}
+              aria-pressed={agrupar === chave}
+              className={`px-3 py-1 rounded-full text-xs font-semibold border transition-colors ${
+                agrupar === chave
+                  ? "bg-[#7C3AED] border-[#7C3AED] text-white"
+                  : "bg-white border-[#DDD6FE] text-[#1E1B2E] hover:bg-[#F5F3FF]"
+              }`}
+            >
+              {rotulo}
+            </button>
+          ))}
         </div>
+
+        {/* Grupos */}
+        {grupos.length === 0 ? (
+          <div className="bg-white rounded-xl border border-[#DDD6FE] text-center py-12 text-[#6B7280] text-sm">
+            Nenhuma atividade encontrada
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {grupos.map(g => {
+              const daMateria = g.materiaId !== undefined ? atividades.filter(a => a.materiaId === g.materiaId) : [];
+              const feitas = daMateria.filter(a => a.status === "concluida").length;
+              const materiaConcluida = daMateria.length > 0 && feitas === daMateria.length;
+
+              return (
+                <section
+                  key={g.chave}
+                  className={`bg-white rounded-xl border px-5 pt-4 pb-2 ${materiaConcluida ? "border-[#6EE7B7]" : "border-[#DDD6FE]"}`}
+                >
+                  <header className="flex items-center gap-3 pb-3 border-b border-[#EDE9FE]">
+                    <h3 style={titulo} className="font-semibold text-[#1E1B2E]">{g.titulo}</h3>
+                    <span className="text-xs text-[#6B7280]">
+                      {agrupar === "materia"
+                        ? `${feitas} de ${daMateria.length} atividades`
+                        : `${g.itens.length} atividade${g.itens.length > 1 ? "s" : ""}`}
+                    </span>
+                    {materiaConcluida && (
+                      <span className="text-xs font-semibold text-[#065F46] bg-[#ECFDF5] px-2 py-0.5 rounded-md">Matéria concluída</span>
+                    )}
+                  </header>
+
+                  <ul className="divide-y divide-[#EDE9FE]">
+                    {g.itens.map(a => {
+                      const concluida = a.status === "concluida";
+                      const dias = diasAte(a.prazo);
+                      const feitaEm = dataConclusao(a);
+                      return (
+                        <li key={a.id} className="flex items-center gap-3 py-3">
+                          <button
+                            onClick={() => setDetalhe(a)}
+                            title="Ver detalhes"
+                            className="flex-1 min-w-0 text-left"
+                          >
+                            <span className={`block text-sm truncate hover:underline ${concluida ? "text-[#1E1B2E]" : "font-medium text-[#1E1B2E]"}`}>{a.nome}</span>
+                            {agrupar === "mes" && <span className="block text-xs text-[#6B7280]">{a.materia}</span>}
+                          </button>
+
+                          {concluida ? (
+                            <>
+                              <span className="text-xs text-[#6B7280] text-right">
+                                {feitaEm ? `Concluída em ${feitaEm}` : "Concluída"}
+                              </span>
+                              <button onClick={() => onReabrir(a.id)} className={botaoContorno}>Reabrir</button>
+                            </>
+                          ) : (
+                            <>
+                              <span className={`hidden sm:inline text-xs px-2 py-0.5 rounded-md font-medium ${coresPrioridade[a.prioridade]}`}>
+                                {rotuloPrioridade[a.prioridade]}
+                              </span>
+                              <div className="text-right">
+                                <p className="text-xs font-semibold" style={{ color: corPrazo(dias) }}>{rotuloPrazo(dias)}</p>
+                                <p className="text-xs text-[#6B7280]">{formatarData(a.prazo)}</p>
+                              </div>
+                              <button onClick={() => onConcluir(a.id)} className={botaoContorno}>Concluir</button>
+                            </>
+                          )}
+                          <button
+                            onClick={() => setConfirmarExcluir(a.id)}
+                            title="Excluir"
+                            aria-label={`Excluir ${a.nome}`}
+                            className="w-8 h-8 flex items-center justify-center rounded-lg text-[#9CA3AF] hover:bg-red-50 hover:text-red-500 flex-shrink-0"
+                          >
+                            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.75">
+                              <path d="M3 5h10M6 5V3h4v2M7 8v4M9 8v4M4 5l1 9h6l1-9"/>
+                            </svg>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </section>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* Janela de detalhes */}
@@ -174,16 +253,16 @@ export default function Atividades({ atividades, onNavegar, onConcluir, onExclui
           <div className="bg-white rounded-2xl p-6 w-full max-w-md mx-4 shadow-xl" onClick={e => e.stopPropagation()}>
             <div className="flex items-start justify-between mb-4">
               <div>
-                <h3 style={{ fontFamily: "'Outfit', sans-serif" }} className="font-bold text-lg text-[#1E1B2E]">{detalhe.nome}</h3>
+                <h3 style={titulo} className="font-bold text-lg text-[#1E1B2E]">{detalhe.nome}</h3>
                 <p className="text-sm text-[#6B7280]">{detalhe.materia}</p>
               </div>
-              <button onClick={() => setDetalhe(null)} className="text-[#9CA3AF] hover:text-[#6B7280]">
+              <button onClick={() => setDetalhe(null)} aria-label="Fechar" className="text-[#9CA3AF] hover:text-[#6B7280]">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 5l10 10M15 5L5 15"/>
                 </svg>
               </button>
             </div>
-            <p className="text-sm text-[#374151] mb-4">{detalhe.descricao}</p>
+            {detalhe.descricao && <p className="text-sm text-[#374151] mb-4">{detalhe.descricao}</p>}
             <div className="grid grid-cols-2 gap-3 mb-5">
               <div className="bg-[#F5F3FF] rounded-lg p-3">
                 <p className="text-xs text-[#6B7280]">Prazo</p>
@@ -195,12 +274,19 @@ export default function Atividades({ atividades, onNavegar, onConcluir, onExclui
               </div>
             </div>
             <div className="flex gap-2">
-              {detalhe.status !== "concluida" && (
+              {detalhe.status !== "concluida" ? (
                 <button
                   onClick={() => { onConcluir(detalhe.id); setDetalhe(null); }}
                   className="flex-1 py-2.5 bg-[#7C3AED] text-white rounded-lg text-sm font-medium hover:bg-[#6D28D9]"
                 >
                   Marcar como concluída
+                </button>
+              ) : (
+                <button
+                  onClick={() => { onReabrir(detalhe.id); setDetalhe(null); }}
+                  className="flex-1 py-2.5 bg-[#7C3AED] text-white rounded-lg text-sm font-medium hover:bg-[#6D28D9]"
+                >
+                  Reabrir atividade
                 </button>
               )}
               <button onClick={() => setDetalhe(null)} className="flex-1 py-2.5 border border-[#DDD6FE] text-[#6B7280] rounded-lg text-sm hover:bg-[#F5F3FF]">
@@ -215,12 +301,7 @@ export default function Atividades({ atividades, onNavegar, onConcluir, onExclui
       {confirmarExcluir !== null && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-6 w-full max-w-sm mx-4 shadow-xl">
-            <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#EF4444" strokeWidth="2">
-                <path d="M10 6v5M10 14v1M5 5l10 10M15 5L5 15"/>
-              </svg>
-            </div>
-            <h3 style={{ fontFamily: "'Outfit', sans-serif" }} className="font-bold text-lg text-[#1E1B2E] text-center mb-2">Excluir atividade?</h3>
+            <h3 style={titulo} className="font-bold text-lg text-[#1E1B2E] text-center mb-2">Excluir atividade?</h3>
             <p className="text-sm text-[#6B7280] text-center mb-5">Esta ação não pode ser desfeita.</p>
             <div className="flex gap-2">
               <button

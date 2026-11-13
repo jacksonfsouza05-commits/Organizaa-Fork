@@ -22,6 +22,7 @@ export interface Atividade {
   prazo: string;
   prioridade: Prioridade;
   status: Status;
+  concluidaEm?: string | null;
 }
 
 export interface Materia {

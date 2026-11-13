@@ -6,7 +6,7 @@ const router = Router();
 const HOJE = "(now() at time zone 'America/Sao_Paulo')::date";
 
 const CONSULTA = `
-  select a.id, a.nome, a.descricao, a.prazo, a.prioridade, a.materia_id,
+  select a.id, a.nome, a.descricao, a.prazo, a.prioridade, a.materia_id, a.concluida_em,
          m.nome as materia, m.cor as materia_cor,
          case
            when a.concluida then 'concluida'
@@ -28,6 +28,7 @@ const formatar = (r) => ({
   materiaId: r.materia_id,
   materia: r.materia,
   materiaCor: r.materia_cor,
+  concluidaEm: r.concluida_em,
 });
 
 async function buscarUma(id, estudanteId) {

@@ -70,6 +70,13 @@ export default function App() {
     } catch (e) { falhou(e); }
   };
 
+  const aoReabrir = async (id: number) => {
+    try {
+      await api.reabrirAtividade(id);
+      await carregar();
+    } catch (e) { falhou(e); }
+  };
+
   const aoExcluir = async (id: number) => {
     try {
       await api.excluirAtividade(id);
@@ -130,6 +137,7 @@ export default function App() {
             atividades={atividades}
             onNavegar={navegar}
             onConcluir={aoConcluir}
+            onReabrir={aoReabrir}
             onExcluir={aoExcluir}
             onEditar={(a) => { setEditandoAtividade(a); navegar("adicionar-atividade"); }}
           />
