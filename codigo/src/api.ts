@@ -53,18 +53,18 @@ export interface DadosConteudo {
 
 export const api = {
   entrar: (email: string, senha: string) =>
-    requisicao<{ token: string; estudante: Estudante }>("POST", "/autenticacao/entrar", { email, senha }),
+    requisicao<{ token: string; estudante: Estudante }>("POST", "/auth/entrar", { email, senha }),
   registrar: (nome: string, email: string, senha: string) =>
-    requisicao<{ token: string; estudante: Estudante }>("POST", "/autenticacao/registrar", { nome, email, senha }),
-  eu: () => requisicao<Estudante>("GET", "/autenticacao/eu"),
+    requisicao<{ token: string; estudante: Estudante }>("POST", "/auth/registrar", { nome, email, senha }),
+  eu: () => requisicao<Estudante>("GET", "/auth/eu"),
   salvarPerfil: (d: Pick<Estudante, "nome" | "notifPrazo" | "notifEmail" | "notifDiario" | "notifSemanal" | "antecedencia">) =>
-    requisicao<Estudante>("PUT", "/autenticacao/eu", d),
+    requisicao<Estudante>("PUT", "/auth/eu", d),
   trocarSenha: (senhaAtual: string, novaSenha: string) =>
-    requisicao<{ ok: boolean }>("PUT", "/autenticacao/senha", { senhaAtual, novaSenha }),
+    requisicao<{ ok: boolean }>("PUT", "/auth/senha", { senhaAtual, novaSenha }),
   esqueciSenha: (email: string) =>
-    requisicao<{ ok: boolean }>("POST", "/autenticacao/esqueci-senha", { email }),
+    requisicao<{ ok: boolean }>("POST", "/auth/esqueci-senha", { email }),
   redefinirSenha: (token: string, novaSenha: string) =>
-    requisicao<{ ok: boolean }>("POST", "/autenticacao/redefinir-senha", { token, novaSenha }),
+    requisicao<{ ok: boolean }>("POST", "/auth/redefinir-senha", { token, novaSenha }),
 
   atividades: () => requisicao<Atividade[]>("GET", "/atividades"),
   criarAtividade: (d: DadosAtividade) => requisicao<Atividade>("POST", "/atividades", d),

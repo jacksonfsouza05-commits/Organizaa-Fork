@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.get("/api/saude", (_req, res) => res.json({ ok: true }));
 
-app.use("/api/autenticacao", rotasAutenticacao);
+app.use("/api/auth", rotasAutenticacao);
 app.use("/api/atividades", exigirAutenticacao, rotasAtividades);
 app.use("/api/materias", exigirAutenticacao, rotasMaterias);
 app.use("/api/conteudos", exigirAutenticacao, rotasConteudos);
