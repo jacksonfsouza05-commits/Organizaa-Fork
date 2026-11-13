@@ -1,7 +1,7 @@
 import type { Atividade, Materia, Conteudo, Estudante, Notificacao, Prioridade } from "./data";
 
 const BASE = import.meta.env.VITE_API_URL || "http://localhost:3333/api";
-const CHAVE = "avisai_token";
+const CHAVE = "organizaai_token";
 
 export const getToken = () => localStorage.getItem(CHAVE);
 export const salvarToken = (t: string) => localStorage.setItem(CHAVE, t);

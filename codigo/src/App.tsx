@@ -10,6 +10,7 @@ import AdicionarAtividade from "./pages/AdicionarAtividade";
 import Materias from "./pages/Materias";
 import ResumoMateria from "./pages/ResumoMateria";
 import Calendario from "./pages/Calendario";
+import Progresso from "./pages/Progresso";
 import Configuracoes from "./pages/Configuracoes";
 
 export default function App() {
@@ -109,7 +110,7 @@ export default function App() {
   const navigate = (page: Page) => {
     setCurrentPage(page);
     if (page !== "adicionar-atividade") setEditandoAtividade(null);
-    if (page === "materias" || page === "dashboard") carregar().catch(falhou);
+    if (page === "materias" || page === "dashboard" || page === "progresso") carregar().catch(falhou);
   };
 
   const renderPage = () => {
@@ -155,7 +156,9 @@ export default function App() {
       case "resumo-materia":
         return <ResumoMateria materia={materiaAtiva} onNavigate={navigate} onMudou={() => carregar().catch(falhou)} />;
       case "calendario":
-        return <Calendario atividades={atividades} />;
+        return <Calendario atividades={atividades} onConcluir={handleConcluir} />;
+      case "progresso":
+        return <Progresso atividades={atividades} materias={materias} />;
       case "configuracoes":
         return <Configuracoes />;
       default:

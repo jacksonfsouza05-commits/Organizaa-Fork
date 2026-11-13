@@ -269,7 +269,7 @@ nome: campo que armazena o nome da disciplina
 
 <br>
 a) Histórias de Usuário vs. Protótipo<br>
-(Associação de cada História de Usuário / Requisito com a respectiva tela do protótipo do sistema AvisAí)<br>
+(Associação de cada História de Usuário / Requisito com a respectiva tela do protótipo do sistema OrganizaAI)<br>
 
 HU 01 (Lucas - Aluno): Consultar notas e desempenho<br>
 

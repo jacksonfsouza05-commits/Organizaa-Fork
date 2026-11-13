@@ -11,7 +11,7 @@ const navItems = [
   { id: "atividades" as Page, label: "Atividades", icon: ClipboardIcon },
   { id: "materias" as Page, label: "Matérias", icon: BookIcon },
   { id: "calendario" as Page, label: "Calendário", icon: CalendarIcon },
-  { id: "dashboard" as Page, label: "Progresso", icon: ChartIcon, scrollTo: "progresso" },
+  { id: "progresso" as Page, label: "Progresso", icon: ChartIcon },
   { id: "configuracoes" as Page, label: "Configurações", icon: SettingsIcon },
 ];
 
@@ -33,7 +33,7 @@ export default function Sidebar({ currentPage, onNavigate }: SidebarProps) {
             </svg>
           </div>
           <div>
-            <span style={{ fontFamily: "'Outfit', sans-serif" }} className="font-bold text-lg text-[#1E1B2E] tracking-tight">AvisAí</span>
+            <span style={{ fontFamily: "'Outfit', sans-serif" }} className="font-bold text-lg text-[#1E1B2E] tracking-tight">OrganizaAI</span>
           </div>
         </div>
       </div>
@@ -42,19 +42,12 @@ export default function Sidebar({ currentPage, onNavigate }: SidebarProps) {
       <nav className="flex-1 px-3 py-4 overflow-y-auto">
         <div className="space-y-1">
           {navItems.map((item, i) => {
-            const isActive = currentPage === item.id && item.label !== "Configurações"
-              ? (item.label === "Progresso" ? currentPage === "dashboard" && false : currentPage === item.id)
-              : currentPage === item.id;
-
-            const active = currentPage === item.id && !(item.label === "Progresso" && currentPage !== "dashboard");
-            const progressActive = item.label === "Progresso" && currentPage === "dashboard";
-
             return (
               <button
                 key={i}
                 onClick={() => onNavigate(item.id)}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 ${
-                  active || progressActive ? activeClass : inactiveClass
+                  currentPage === item.id ? activeClass : inactiveClass
                 }`}
               >
                 <item.icon size={18} />

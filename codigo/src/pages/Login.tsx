@@ -53,7 +53,7 @@ export default function Login({ onEntrar }: LoginProps) {
                 <circle cx="8" cy="8" r="2" fill="#7C3AED"/>
               </svg>
             </div>
-            <span style={{ fontFamily: "'Outfit', sans-serif" }} className="text-white text-2xl font-bold tracking-tight">AvisAí</span>
+            <span style={{ fontFamily: "'Outfit', sans-serif" }} className="text-white text-2xl font-bold tracking-tight">OrganizaAI</span>
           </div>
         </div>
         <div className="relative z-10">
@@ -77,7 +77,7 @@ export default function Login({ onEntrar }: LoginProps) {
           </div>
         </div>
         <div className="relative z-10 text-white/40 text-xs">
-          © 2026 AvisAí. Todos os direitos reservados.
+          © 2026 OrganizaAI. Todos os direitos reservados.
         </div>
       </div>
 
@@ -93,7 +93,7 @@ export default function Login({ onEntrar }: LoginProps) {
                 <circle cx="8" cy="8" r="2" fill="#7C3AED"/>
               </svg>
             </div>
-            <span style={{ fontFamily: "'Outfit', sans-serif" }} className="text-[#1E1B2E] text-2xl font-bold">AvisAí</span>
+            <span style={{ fontFamily: "'Outfit', sans-serif" }} className="text-[#1E1B2E] text-2xl font-bold">OrganizaAI</span>
           </div>
 
           {modo === "login" && (

@@ -25,8 +25,6 @@ export default function Dashboard({ atividades, materias, onNavigate, onConcluir
     return dias === 0 && a.status !== "concluida";
   });
 
-  const progressoGeral = atividades.length ? Math.round((concluidas.length / atividades.length) * 100) : 0;
-
   return (
     <div className="flex flex-col h-full">
       <Header
@@ -113,41 +111,29 @@ export default function Dashboard({ atividades, materias, onNavigate, onConcluir
             </div>
           </div>
 
-          {/* Progress panel */}
-          <div id="progresso" className="bg-white rounded-xl border border-[#DDD6FE] p-5">
-            <h3 style={{ fontFamily: "'Outfit', sans-serif" }} className="font-semibold text-[#1E1B2E] mb-4">Progresso geral</h3>
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs text-[#6B7280]">Atividades concluídas</span>
-                <span className="text-sm font-bold text-[#7C3AED]" style={{ fontFamily: "'Outfit', sans-serif" }}>{progressoGeral}%</span>
-              </div>
-              <div className="w-full h-2.5 bg-[#EDE9FE] rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-[#7C3AED] to-[#A78BFA] rounded-full transition-all"
-                  style={{ width: `${progressoGeral}%` }}
-                />
-              </div>
-              <p className="text-xs text-[#6B7280] mt-1">{concluidas.length} de {atividades.length} atividades</p>
-            </div>
-            <div className="space-y-3">
-              {materias.slice(0, 5).map(m => {
-                const prog = m.atividades > 0 ? Math.round((m.concluidas / m.atividades) * 100) : 0;
+          {/* Esta semana */}
+          <div className="bg-white rounded-xl border border-[#DDD6FE] p-5">
+            <h3 style={{ fontFamily: "'Outfit', sans-serif" }} className="font-semibold text-[#1E1B2E] mb-4">Esta semana</h3>
+            <div className="space-y-1.5">
+              {Array.from({ length: 7 }, (_, i) => {
+                const dt = new Date(); dt.setDate(dt.getDate() + i);
+                const n = atividades.filter(a => a.status !== "concluida" && daysUntil(a.prazo) === i).length;
                 return (
-                  <div key={m.id}>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-medium text-[#1E1B2E]">{m.nome}</span>
-                      <span className="text-xs text-[#6B7280]">{prog}%</span>
-                    </div>
-                    <div className="w-full h-1.5 bg-[#F0EDF9] rounded-full overflow-hidden">
-                      <div
-                        className="h-full rounded-full"
-                        style={{ width: `${prog}%`, backgroundColor: m.cor }}
-                      />
-                    </div>
+                  <div key={i} className={`flex items-center justify-between px-3 py-2 rounded-lg ${i === 0 ? "bg-[#F5F3FF] border border-[#DDD6FE]" : ""}`}>
+                    <span className={`text-sm ${i === 0 ? "font-semibold text-[#7C3AED]" : "text-[#1E1B2E]"}`}>
+                      {i === 0 ? "Hoje" : i === 1 ? "Amanhã" : dt.toLocaleDateString("pt-BR", { weekday: "long" }).replace(/^./, c => c.toUpperCase())}
+                      <span className="text-xs text-[#9CA3AF] ml-2">{dt.getDate()}/{String(dt.getMonth() + 1).padStart(2, "0")}</span>
+                    </span>
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${n ? "bg-[#EDE9FE] text-[#7C3AED]" : "text-[#C4C4CC]"}`}>
+                      {n ? `${n} entrega${n > 1 ? "s" : ""}` : "livre"}
+                    </span>
                   </div>
                 );
               })}
             </div>
+            <button onClick={() => onNavigate("progresso")} className="mt-4 w-full py-2 text-xs font-semibold text-[#7C3AED] border border-[#DDD6FE] rounded-lg hover:bg-[#F5F3FF]">
+              Ver meu progresso →
+            </button>
           </div>
         </div>
 

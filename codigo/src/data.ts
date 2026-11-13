@@ -6,6 +6,7 @@ export type Page =
   | "materias"
   | "resumo-materia"
   | "calendario"
+  | "progresso"
   | "configuracoes";
 
 export type Status = "pendente" | "concluida" | "prazo-proximo";
