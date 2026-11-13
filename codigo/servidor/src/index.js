@@ -1,8 +1,10 @@
 import "dotenv/config";
+import fs from "node:fs";
 import express from "express";
 import cors from "cors";
 import { exigirAutenticacao } from "./autenticacao.js";
 import { iniciarAgendador } from "./avisos.js";
+import { pool } from "./banco.js";
 import rotasAutenticacao from "./rotas/autenticacao.js";
 import rotasAtividades from "./rotas/atividades.js";
 import rotasMaterias from "./rotas/materias.js";
@@ -29,6 +31,16 @@ app.use((erro, _req, res, _next) => {
   if (erro.code === "22P02") return res.status(400).json({ erro: "Dado inválido" });
   res.status(500).json({ erro: "Algo deu errado aqui do nosso lado" });
 });
+
+// Atualiza as tabelas ao ligar (só cria o que falta, não apaga nada).
+// Assim não é preciso rodar o migrate à mão depois de cada mudança no banco.
+try {
+  const sql = fs.readFileSync(new URL("../sql/schema.sql", import.meta.url), "utf8");
+  await pool.query(sql);
+  console.log("Banco atualizado");
+} catch (erro) {
+  console.error("Não consegui atualizar o banco:", erro.message);
+}
 
 const porta = process.env.PORT || 3333;
 app.listen(porta, () => {
